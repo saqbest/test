@@ -20,11 +20,31 @@
 <script>
     $(document).ready(function(){
         //Get
-        var p = $("#dialog");
-        var offset = p.offset();
-        console.log(offset)
+        $(".ui-dialog").mouseup(function () {
+
+            var p = $(".ui-dialog");
+            var offset = p.offset();
+           // console.log(offset.top)
+            var top=offset.top
+            var left=offset.left
+            $.post("dbset.php", {top: top, left: left})
+                .done(function (data) {
+//                    obj = jQuery.parseJSON(data)
+//                    console.log(obj)
+
+                })
+
+            })
 //set
-       // $("#dialog").offset({ top: offset.80, left: offset.10})
+        $.post("dbinfo.php")
+            .done(function (data) {
+                obj = jQuery.parseJSON(data)
+                console.log(obj)
+                $(".ui-dialog").offset({ top:obj.top, left:obj.left})
+
+            })
+
+
 
     });
 </script>
